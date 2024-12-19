@@ -1,6 +1,6 @@
 
 def origin():
-    from os import getlogin, mkdir
+    from os import getlogin, mkdir,system
 
     name = getlogin()
     path = rf'C:\Users\{name}\AppData\Roaming\file'
@@ -13,6 +13,7 @@ def origin():
         print('Выбирите нужное действие')
         print('5.Выход')
         num = input()
+        system('cls')
         if num == "5":
             work = False
         else:
