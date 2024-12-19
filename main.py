@@ -1,5 +1,14 @@
+
 def origin():
-    work = True
+    from os import getlogin, mkdir
+
+    name = getlogin()
+    path = rf'C:\Users\{name}\AppData\Roaming\file'
+    try:
+        mkdir(path)
+    except:
+        work = True
+
     while work:
         print('Выбирите нужное действие')
         print('5.Выход')
