@@ -16,6 +16,7 @@ def origin():
         print('Выбирите нужное действие')
         print('1.Создание каталога рецептов')
         print('2.Список всех каталогов с рецептами')
+        print('3.Удаление каталога')
         print('5.Выход')
         num = input()
         system('cls')
@@ -25,6 +26,11 @@ def origin():
         elif num == "2":
             lst_file = os.listdir(path)
             f_m.lst_all_catalog(lst_file)
+        elif num == "3":
+            lst_file = os.listdir(path)
+            f_m.lst_all_catalog(lst_file)
+            tag = int(input("Введите номер каталога для удаления "))
+            os.remove(f_m.del_catalog(path, lst_file, tag))
         elif num == "5":
             work = False
         else:
