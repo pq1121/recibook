@@ -15,3 +15,7 @@ def lst_all_catalog(lst: list):
             print(f'{i+1}.{lst_new[0]}')
     else:
         print("Каталоги с рецептами отсутствуют")
+
+def del_catalog(path: str,lst: list,target: int):
+    path_del = path + rf'\{lst[target - 1]}'
+    return path_del
