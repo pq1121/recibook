@@ -1,11 +1,12 @@
 
 def origin():
-    from os import getlogin, mkdir,system
+    from os import getlogin, mkdir, system
 
     name = getlogin()
     path = rf'C:\Users\{name}\AppData\Roaming\file'
     try:
         mkdir(path)
+        work = True
     except:
         work = True
 
