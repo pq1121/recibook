@@ -44,3 +44,15 @@ def add_recipe(path: str,lst: list, target: int):
         recipe = f"\n{name}_{compound}_{description}_{time}_{now}_{diff}"
     with open(path_rec, 'a', encoding='utf8') as file:
         file.write(recipe)
+    rename_catalog(path_rec)
+def rename_catalog(path: str):
+    from os import rename
+    """
+    Изменение имени каталога
+    :param target: выбор каталога
+    :return:
+    """
+    lst = path.replace('.rcb', '').split(',')
+    lst[2] = str(int(lst[2]) + 1)
+    new_path = f"{lst[0]},{lst[1]},{lst[2]}.rcb"
+    rename(path, new_path)
