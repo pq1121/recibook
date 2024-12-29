@@ -39,9 +39,9 @@ def add_recipe(path: str,lst: list, target: int):
     with open(path_rec, 'r', encoding='utf8') as file:
         data = file.read()
     if not data:
-        recipe = f"{name}_{compound}_{description}_{time}_{now}_{diff}"
+        recipe = f"{name};{compound};{description};{time};{now};{diff}"
     else:
-        recipe = f"\n{name}_{compound}_{description}_{time}_{now}_{diff}"
+        recipe = f"\n{name};{compound};{description};{time};{now};{diff}"
     with open(path_rec, 'a', encoding='utf8') as file:
         file.write(recipe)
     rename_catalog(path_rec)
@@ -56,3 +56,12 @@ def rename_catalog(path: str):
     lst[2] = str(int(lst[2]) + 1)
     new_path = f"{lst[0]},{lst[1]},{lst[2]}.rcb"
     rename(path, new_path)
+
+def output_catalog(path: str,lst: list, target: int):
+    path_open = path + rf'\{lst[target - 1]}'
+    with open(path_open,'r',encoding='utf8') as file:
+        data_lst = file.read().split('\n')
+
+    for i in range(len(data_lst)):
+        new_lst = data_lst[i].split(';')
+        print(f'{i+1}.{new_lst[0]}')
