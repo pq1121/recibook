@@ -1,7 +1,7 @@
 def create_catalog(path):
     import datetime
 
-    now = datetime.datetime.now().strftime("%H-%M_%d-%m-%Y")
+    now = datetime.datetime.now().strftime("%H_%M %d-%m-%Y")
     text = input('Введите название киталога ')
     path_add = path + rf'\{text},{now},0.rcb'
 
@@ -12,7 +12,7 @@ def lst_all_catalog(lst: list):
         print("Список Каталогов с рецептами")
         for i in range(len(lst)):
             lst_new = lst[i].split(',')
-            print(f'{i+1}.{lst_new[0]}')
+            print(f'{i+1}.{lst_new[0]} дата создания:{lst_new[1].replace("_", ":")} рецептов:{lst_new[2].replace(".rcb","")}')
     else:
         print("Каталоги с рецептами отсутствуют")
 
