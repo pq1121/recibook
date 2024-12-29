@@ -25,9 +25,6 @@ def origin():
             lst_file = listdir(path)
             f_m.lst_all_catalog(lst_file)
         elif num == "3":
-            #lst_file = listdir(path)
-            #f_m.lst_all_catalog(lst_file)
-            #tag = int(input("Введите номер каталога для удаления "))
             remove(f_m.del_catalog(path))
         elif num == "4":
             rec = True
