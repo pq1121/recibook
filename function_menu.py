@@ -1,3 +1,4 @@
+from function_files import list_catalog
 def create_catalog(path):
     import datetime
 
@@ -16,7 +17,10 @@ def lst_all_catalog(lst: list):
     else:
         print("Каталоги с рецептами отсутствуют")
 
-def del_catalog(path: str,lst: list,target: int):
+def del_catalog(path: str):
+    lst_all_catalog(list_catalog(path))
+    target = int(input("Введите номер каталога для удаления "))
+    lst = list_catalog(path)
     path_del = path + rf'\{lst[target - 1]}'
     return path_del
 

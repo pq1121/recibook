@@ -25,10 +25,10 @@ def origin():
             lst_file = listdir(path)
             f_m.lst_all_catalog(lst_file)
         elif num == "3":
-            lst_file = listdir(path)
-            f_m.lst_all_catalog(lst_file)
-            tag = int(input("Введите номер каталога для удаления "))
-            remove(f_m.del_catalog(path, lst_file, tag))
+            #lst_file = listdir(path)
+            #f_m.lst_all_catalog(lst_file)
+            #tag = int(input("Введите номер каталога для удаления "))
+            remove(f_m.del_catalog(path))
         elif num == "4":
             rec = True
             while rec:
@@ -37,7 +37,8 @@ def origin():
                 print('2.Добавление рецепта')
                 print('3.Поиск рецепта по наименованию')
                 print('4.Удаление рецепта')
-                print('5.Возврат в предыдущее меню')
+                print('5.Редактирование рецепта')
+                print('6.Возврат в предыдущее меню')
                 num_sec = input()
                 system('cls')
                 if num_sec == "1":
@@ -57,6 +58,8 @@ def origin():
                 elif num_sec == "4":
                     pass
                 elif num_sec == "5":
+                    pass
+                elif num_sec == "6":
                     rec = False
                 else:
                     print('Не выбран пункт меню!!!')
