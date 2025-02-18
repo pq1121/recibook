@@ -1,4 +1,4 @@
-def origin():
+def run():
     from os import getlogin, mkdir, system, listdir, remove
     import function_menu as f_m
     name = getlogin()
