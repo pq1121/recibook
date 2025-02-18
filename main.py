@@ -44,7 +44,7 @@ def run():
                     f_m.lst_all_catalog(lst_file)
                     tag_rec = int(input("Выберите номер каталога для просмотра рецептов "))
                     system('cls')
-                    f_m.output_catalog(path,lst_file,tag_rec)
+                    f_m.output_catalog(path, lst_file, tag_rec)
                 elif num_sec == "2":
                     lst_file = listdir(path)
                     f_m.lst_all_catalog(lst_file)

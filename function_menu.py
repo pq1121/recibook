@@ -1,3 +1,5 @@
+import os
+
 from function_files import list_catalog
 
 def create_catalog(path):
@@ -64,7 +66,12 @@ def rename_catalog(path: str):
     rename(path, new_path)
 
 def output_catalog(path: str, lst: list, target: int):
+    from os import stat
+
     path_open = path + rf'\{lst[target - 1]}'
+    if stat(path_open).st_size == 0:
+        print(f'В каталоге {((lst[target - 1]).split(','))[0]} рецепты отсутствуют')
+        return
     with open(path_open, 'r', encoding='utf8') as file:
         data_lst = file.read().split('\n')
 
