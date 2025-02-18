@@ -25,7 +25,10 @@ def run():
             lst_file = listdir(path)
             f_m.lst_all_catalog(lst_file)
         elif num == "3":
-            remove(f_m.del_catalog(path))
+            check = f_m.del_catalog(path)
+            if check != 0:
+                remove(check)
+            system('cls')
         elif num == "4":
             rec = True
             while rec:

@@ -22,10 +22,13 @@ def lst_all_catalog(lst: list):
 
 def del_catalog(path: str):
     lst_all_catalog(list_catalog(path))
-    target = int(input("Введите номер каталога для удаления "))
-    lst = list_catalog(path)
-    path_del = path + rf'\{lst[target - 1]}'
-    return path_del
+    target = int(input("Введите номер каталога для удаления или 0 для отмены "))
+    if target == 0:
+        return 0
+    else:
+        lst = list_catalog(path)
+        path_del = path + rf'\{lst[target - 1]}'
+        return path_del
 
 def add_recipe(path: str,lst: list, target: int):
     import datetime
@@ -79,3 +82,6 @@ def output_recipe(path: str, lst: list, target: int):
         new_lst = data_lst[i].split(';')
         print(f'{i+1}.{new_lst[0]}; Состав:{new_lst[1]}; Описание:{new_lst[2]}; Время приготовления:{new_lst[3]};'
               f' Дата создания:{new_lst[4]}; Сложность:{new_lst[5]}')
+
+def lst_all_recipe(path: str):
+    pass
