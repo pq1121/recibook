@@ -36,6 +36,7 @@ def run():
                 print('4.Удаление рецепта')
                 print('5.Редактирование рецепта')
                 print('6.Возврат в предыдущее меню')
+                print('7.Выход')
                 num_sec = input()
                 system('cls')
                 if num_sec == "1":
@@ -58,6 +59,9 @@ def run():
                     pass
                 elif num_sec == "6":
                     rec = False
+                elif num_sec == "7":
+                    rec = False
+                    work = False
                 else:
                     print('Не выбран пункт меню!!!')
         elif num == "5":

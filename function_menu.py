@@ -1,4 +1,5 @@
 from function_files import list_catalog
+
 def create_catalog(path):
     import datetime
 
@@ -49,6 +50,7 @@ def add_recipe(path: str,lst: list, target: int):
     with open(path_rec, 'a', encoding='utf8') as file:
         file.write(recipe)
     rename_catalog(path_rec)
+
 def rename_catalog(path: str):
     from os import rename
     """
@@ -61,9 +63,9 @@ def rename_catalog(path: str):
     new_path = f"{lst[0]},{lst[1]},{lst[2]}.rcb"
     rename(path, new_path)
 
-def output_catalog(path: str,lst: list, target: int):
+def output_catalog(path: str, lst: list, target: int):
     path_open = path + rf'\{lst[target - 1]}'
-    with open(path_open,'r',encoding='utf8') as file:
+    with open(path_open, 'r', encoding='utf8') as file:
         data_lst = file.read().split('\n')
 
     for i in range(len(data_lst)):
