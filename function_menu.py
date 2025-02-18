@@ -65,7 +65,7 @@ def rename_catalog(path: str):
     new_path = f"{lst[0]},{lst[1]},{lst[2]}.rcb"
     rename(path, new_path)
 
-def output_catalog(path: str, lst: list, target: int):
+def output_recipe(path: str, lst: list, target: int):
     from os import stat
 
     path_open = path + rf'\{lst[target - 1]}'
@@ -77,4 +77,5 @@ def output_catalog(path: str, lst: list, target: int):
 
     for i in range(len(data_lst)):
         new_lst = data_lst[i].split(';')
-        print(f'{i+1}.{new_lst[0]}')
+        print(f'{i+1}.{new_lst[0]}; Состав:{new_lst[1]}; Описание:{new_lst[2]}; Время приготовления:{new_lst[3]};'
+              f' Дата создания:{new_lst[4]}; Сложность:{new_lst[5]}')
