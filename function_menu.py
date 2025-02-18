@@ -30,7 +30,7 @@ def del_catalog(path: str):
         path_del = path + rf'\{lst[target - 1]}'
         return path_del
 
-def add_recipe(path: str,lst: list, target: int):
+def add_recipe(path: str, lst: list, target: int):
     import datetime
     """
     Добавления рецепта в каталог
@@ -82,6 +82,17 @@ def output_recipe(path: str, lst: list, target: int):
         new_lst = data_lst[i].split(';')
         print(f'{i+1}.{new_lst[0]}; Состав:{new_lst[1]}; Описание:{new_lst[2]}; Время приготовления:{new_lst[3]};'
               f' Дата создания:{new_lst[4]}; Сложность:{new_lst[5]}')
+    return path_open
 
-def lst_all_recipe(path: str):
-    pass
+def del_recipe(path: str, target: int):
+    with open(path, 'r', encoding='utf8') as file:
+        data_lst = file.read().split('\n')
+
+    data_lst.remove(data_lst[target - 1])
+    result = ''
+    for rec in data_lst:
+        result += f"{rec}\n"
+    result = result[:-1]
+
+    with open(path, 'w', encoding='utf8') as file:
+        file.write(result)

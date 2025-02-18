@@ -42,12 +42,15 @@ def run():
                 print('7.Выход')
                 num_sec = input()
                 system('cls')
-                if num_sec == "1":
+                if num_sec == "1" or num_sec == "4":
                     lst_file = listdir(path)
                     f_m.lst_all_catalog(lst_file)
                     tag_rec = int(input("Выберите номер каталога для просмотра рецептов "))
                     system('cls')
-                    f_m.output_recipe(path, lst_file, tag_rec)
+                    path_tag = f_m.output_recipe(path, lst_file, tag_rec)
+                    if num_sec == "4":
+                        tag_del_rec = int(input("Выберите номер рецепта для удаления "))
+                        f_m.del_recipe(path_tag, tag_del_rec)
                 elif num_sec == "2":
                     lst_file = listdir(path)
                     f_m.lst_all_catalog(lst_file)
@@ -55,8 +58,6 @@ def run():
                     system('cls')
                     f_m.add_recipe(path, lst_file, tag_add_rec)
                 elif num_sec == "3":
-                    pass
-                elif num_sec == "4":
                     pass
                 elif num_sec == "5":
                     pass
