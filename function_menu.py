@@ -2,12 +2,11 @@ import os
 
 from function_files import list_catalog
 
-def create_catalog(path):
+def create_catalog(path: str, name: str):
     import datetime
 
     now = datetime.datetime.now().strftime("%H_%M %d-%m-%Y")
-    text = input('Введите название киталога ')
-    path_add = path + rf'\{text},{now},0.rcb'
+    path_add = path + rf'\{name},{now},0.rcb'
 
     open(path_add, 'w')
 
@@ -17,6 +16,7 @@ def lst_all_catalog(lst: list):
         for i in range(len(lst)):
             lst_new = lst[i].split(',')
             print(f'{i+1}.{lst_new[0]} дата создания:{lst_new[1].replace("_", ":")} рецептов:{lst_new[2].replace(".rcb","")}')
+        print()
     else:
         print("Каталоги с рецептами отсутствуют")
 
@@ -82,6 +82,7 @@ def output_recipe(path: str, lst: list, target: int):
         new_lst = data_lst[i].split(';')
         print(f'{i+1}.{new_lst[0]}; Состав:{new_lst[1]}; Описание:{new_lst[2]}; Время приготовления:{new_lst[3]};'
               f' Дата создания:{new_lst[4]}; Сложность:{new_lst[5]}')
+    print()
     return path_open
 
 def del_recipe(path: str, target: int):

@@ -19,7 +19,9 @@ def run():
         num = input()
         system('cls')
         if num == "1":
-            f_m.create_catalog(path)
+            name = input('Введите название киталога или 0 для отмены ')
+            if name != "0":
+                f_m.create_catalog(path, name)
             system('cls')
         elif num == "2" or num == "3":
             lst_file = listdir(path)
@@ -45,19 +47,23 @@ def run():
                 if num_sec == "1" or num_sec == "4":
                     lst_file = listdir(path)
                     f_m.lst_all_catalog(lst_file)
-                    tag_rec = int(input("Выберите номер каталога для просмотра рецептов "))
-                    system('cls')
-                    path_tag = f_m.output_recipe(path, lst_file, tag_rec)
-                    if num_sec == "4":
-                        tag_del_rec = int(input("Выберите номер рецепта для удаления "))
-                        f_m.del_recipe(path_tag, tag_del_rec)
+                    tag_rec = int(input("Выберите номер каталога для просмотра рецептов или 0 для отмены "))
+                    if tag_rec != 0:
                         system('cls')
+                        path_tag = f_m.output_recipe(path, lst_file, tag_rec)
+                        if num_sec == "4":
+                            tag_del_rec = int(input("Выберите номер рецепта для удаления или 0 для отмены "))
+                            if tag_del_rec != 0:
+                                f_m.del_recipe(path_tag, tag_del_rec)
+                    system('cls')
                 elif num_sec == "2":
                     lst_file = listdir(path)
                     f_m.lst_all_catalog(lst_file)
-                    tag_add_rec = int(input("Выберите номер каталога для добавления рецепта "))
+                    tag_add_rec = int(input("Выберите номер каталога для добавления рецепта или 0 для отмены "))
+                    if tag_add_rec != 0:
+                        system('cls')
+                        f_m.add_recipe(path, lst_file, tag_add_rec)
                     system('cls')
-                    f_m.add_recipe(path, lst_file, tag_add_rec)
                 elif num_sec == "3":
                     pass
                 elif num_sec == "5":
