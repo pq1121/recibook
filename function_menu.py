@@ -2,6 +2,8 @@ import os
 
 from function_files import list_catalog
 
+add = 1
+dell = 2
 def create_catalog(path: str, name: str):
     import datetime
 
@@ -38,7 +40,6 @@ def add_recipe(path: str, lst: list, target: int):
     :param target: в какой каталог произвести запись
     :return:
     """
-    add = 1
     name = input('Введите название рецепта ')
     compound = input('Введите состав рецепта ')
     description = input('Введите краткое описание рецепта ')
@@ -56,7 +57,7 @@ def add_recipe(path: str, lst: list, target: int):
         file.write(recipe)
     rename_catalog(path_rec, add)
 
-def rename_catalog(path: str, add: int):
+def rename_catalog(path: str, value: int):
     from os import rename
     """
     Изменение имени каталога
@@ -64,7 +65,10 @@ def rename_catalog(path: str, add: int):
     :return:
     """
     lst = path.replace('.rcb', '').split(',')
-    lst[2] = str(int(lst[2]) + add)
+    if value == add:
+        lst[2] = str(int(lst[2]) + 1)
+    else:
+        lst[2] = str(int(lst[2]) - 1)
     new_path = f"{lst[0]},{lst[1]},{lst[2]}.rcb"
     rename(path, new_path)
 
@@ -73,8 +77,8 @@ def output_recipe(path: str, lst: list, target: int):
 
     path_open = path + rf'\{lst[target - 1]}'
     if stat(path_open).st_size == 0:
-        print(f'В каталоге {((lst[target - 1]).split(','))[0]} рецепты отсутствуют')
-        return
+        print(f'В каталоге {((lst[target - 1]).split(','))[0]} рецепты отсутствуют\n')
+        return 0
     with open(path_open, 'r', encoding='utf8') as file:
         data_lst = file.read().split('\n')
 
@@ -97,3 +101,4 @@ def del_recipe(path: str, target: int):
 
     with open(path, 'w', encoding='utf8') as file:
         file.write(result)
+    rename_catalog(path, dell)

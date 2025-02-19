@@ -51,11 +51,11 @@ def run():
                     if tag_rec != 0:
                         system('cls')
                         path_tag = f_m.output_recipe(path, lst_file, tag_rec)
-                        if num_sec == "4":
+                        if num_sec == "4" and path_tag != 0:
                             tag_del_rec = int(input("Выберите номер рецепта для удаления или 0 для отмены "))
                             if tag_del_rec != 0:
                                 f_m.del_recipe(path_tag, tag_del_rec)
-                    system('cls')
+                            system('cls')
                 elif num_sec == "2":
                     lst_file = listdir(path)
                     f_m.lst_all_catalog(lst_file)
