@@ -23,13 +23,22 @@ def lst_all_catalog(lst: list):
         print("Каталоги с рецептами отсутствуют")
 
 def del_catalog(path: str, target: int):
-    lst_all_catalog(list_catalog(path))
-    if target == 0:
-        return 0
-    else:
-        lst = list_catalog(path)
-        path_del = path + rf'\{lst[target - 1]}'
-        return path_del
+    from os import stat
+
+    # lst_all_catalog(list_catalog(path))
+    lst = list_catalog(path)
+    path_del = path + rf'\{lst[target - 1]}'
+
+    if stat(path_del).st_size != 0:
+        print(f'В каталоге {((lst[target - 1]).split(','))[0]} есть рецепты\n')
+
+        while True:
+            del_del = input('Для подтверждения удаления каталога с рецептами введите 1 или 0 для отмены удаления ')
+            if del_del == "1":
+                return path_del
+            elif del_del == "0":
+                return 0
+
 
 def add_recipe(path: str, lst: list, target: int):
     import datetime

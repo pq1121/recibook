@@ -1,11 +1,14 @@
 def run():
     from os import getlogin, mkdir, system, listdir, remove
+
     import function_menu as f_m
     name = getlogin()
     path = rf'C:\Users\{name}\AppData\Roaming\file'
+
     try:
         mkdir(path)
         work = True
+
     except:
         work = True
 
@@ -18,20 +21,28 @@ def run():
         print('5.Выход')
         num = input()
         system('cls')
+
         if num == "1":
             name = input('Введите название киталога или 0 для отмены ')
             if name != "0":
                 f_m.create_catalog(path, name)
             system('cls')
+
         elif num == "2" or num == "3":
             lst_file = listdir(path)
             f_m.lst_all_catalog(lst_file)
             if num == "3":
                 tag_del_cat = int(input("Введите номер каталога для удаления или 0 для отмены "))
-                if tag_del_cat != 0:
-                    remove(f_m.del_catalog(path, tag_del_cat))
                 system('cls')
+                if tag_del_cat != 0:
+
+                    check = f_m.del_catalog(path, tag_del_cat)
+                    if check != 0:
+                        remove(check)
+                system('cls')
+
         elif num == "4":
+
             rec = True
             while rec:
                 print('Выбирите нужное действие')
@@ -56,6 +67,7 @@ def run():
                             if tag_del_rec != 0:
                                 f_m.del_recipe(path_tag, tag_del_rec)
                             system('cls')
+
                 elif num_sec == "2":
                     lst_file = listdir(path)
                     f_m.lst_all_catalog(lst_file)
@@ -64,18 +76,25 @@ def run():
                         system('cls')
                         f_m.add_recipe(path, lst_file, tag_add_rec)
                     system('cls')
+
                 elif num_sec == "3":
                     pass
+
                 elif num_sec == "5":
                     pass
+
                 elif num_sec == "6":
                     rec = False
+
                 elif num_sec == "7":
                     rec = False
                     work = False
+
                 else:
                     print('Не выбран пункт меню!!!')
+
         elif num == "5":
             work = False
+
         else:
             print('Не выбран пункт меню!!!')
