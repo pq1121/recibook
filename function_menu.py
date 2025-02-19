@@ -20,7 +20,8 @@ def lst_all_catalog(lst: list):
             print(f'{i+1}.{lst_new[0]} дата создания:{lst_new[1].replace("_", ":")} рецептов:{lst_new[2].replace(".rcb","")}')
         print()
     else:
-        print("Каталоги с рецептами отсутствуют")
+        return 0
+    return 1
 
 def del_catalog(path: str, target: int):
     from os import stat
@@ -38,6 +39,8 @@ def del_catalog(path: str, target: int):
                 return path_del
             elif del_del == "0":
                 return 0
+    else:
+        return path_del
 
 
 def add_recipe(path: str, lst: list, target: int):
