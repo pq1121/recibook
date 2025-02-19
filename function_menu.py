@@ -20,9 +20,8 @@ def lst_all_catalog(lst: list):
     else:
         print("Каталоги с рецептами отсутствуют")
 
-def del_catalog(path: str):
+def del_catalog(path: str, target: int):
     lst_all_catalog(list_catalog(path))
-    target = int(input("Введите номер каталога для удаления или 0 для отмены "))
     if target == 0:
         return 0
     else:
@@ -39,6 +38,7 @@ def add_recipe(path: str, lst: list, target: int):
     :param target: в какой каталог произвести запись
     :return:
     """
+    add = 1
     name = input('Введите название рецепта ')
     compound = input('Введите состав рецепта ')
     description = input('Введите краткое описание рецепта ')
@@ -54,9 +54,9 @@ def add_recipe(path: str, lst: list, target: int):
         recipe = f"\n{name};{compound};{description};{time};{now};{diff}"
     with open(path_rec, 'a', encoding='utf8') as file:
         file.write(recipe)
-    rename_catalog(path_rec)
+    rename_catalog(path_rec, add)
 
-def rename_catalog(path: str):
+def rename_catalog(path: str, add: int):
     from os import rename
     """
     Изменение имени каталога
@@ -64,7 +64,7 @@ def rename_catalog(path: str):
     :return:
     """
     lst = path.replace('.rcb', '').split(',')
-    lst[2] = str(int(lst[2]) + 1)
+    lst[2] = str(int(lst[2]) + add)
     new_path = f"{lst[0]},{lst[1]},{lst[2]}.rcb"
     rename(path, new_path)
 

@@ -21,14 +21,14 @@ def run():
         if num == "1":
             f_m.create_catalog(path)
             system('cls')
-        elif num == "2":
+        elif num == "2" or num == "3":
             lst_file = listdir(path)
             f_m.lst_all_catalog(lst_file)
-        elif num == "3":
-            check = f_m.del_catalog(path)
-            if check != 0:
-                remove(check)
-            system('cls')
+            if num == "3":
+                tag_del_cat = int(input("Введите номер каталога для удаления или 0 для отмены "))
+                if tag_del_cat != 0:
+                    remove(f_m.del_catalog(path, tag_del_cat))
+                system('cls')
         elif num == "4":
             rec = True
             while rec:
@@ -51,6 +51,7 @@ def run():
                     if num_sec == "4":
                         tag_del_rec = int(input("Выберите номер рецепта для удаления "))
                         f_m.del_recipe(path_tag, tag_del_rec)
+                        system('cls')
                 elif num_sec == "2":
                     lst_file = listdir(path)
                     f_m.lst_all_catalog(lst_file)
