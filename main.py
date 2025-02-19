@@ -25,8 +25,18 @@ def run():
         if num == "1":
             name = input('Введите название киталога или 0 для отмены ')
 
-            if name != "0":
-                f_m.create_catalog(path, name)
+            while True:
+
+                if name == "":
+                    system('cls')
+                    print("Название каталога не может быть пустым")
+                    name = input('Введите название киталога или 0 для отмены ')
+
+                elif name != "0":
+                    f_m.create_catalog(path, name)
+                    break
+                else:
+                    break
             system('cls')
 
         elif num == "2" or num == "3":
@@ -49,6 +59,7 @@ def run():
         elif num == "4":
             lst_file = listdir(path)
             if f_m.lst_all_catalog(lst_file):
+                system('cls')
                 rec = True
 
                 while rec:
@@ -67,6 +78,7 @@ def run():
                         lst_file = listdir(path)
                         f_m.lst_all_catalog(lst_file)
                         tag_rec = int(input("Выберите номер каталога для просмотра рецептов или 0 для отмены "))
+                        system('cls')
 
                         if tag_rec != 0:
                             system('cls')
