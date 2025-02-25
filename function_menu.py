@@ -157,3 +157,6 @@ def check_catalog_name(path: str, name: str):
     for catalog in f_f.list_catalog(path):
         if (catalog.split(','))[0] == name:
             return 0
+
+def input_catalog_name():
+    return input('Введите название киталога или 0 для отмены ')

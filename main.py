@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-
 def run():
     from os import getlogin, mkdir, system, listdir, remove, path
 
@@ -26,19 +25,19 @@ def run():
         system('cls')
 
         if num == "1":
-            name = input('Введите название киталога или 0 для отмены ')
+            name = f_m.input_catalog_name()
 
             while True:
 
                 if name == "":
                     system('cls')
                     print("Название каталога не может быть пустым")
-                    name = input('Введите название киталога или 0 для отмены ')
+                    name = f_m.input_catalog_name()
 
                 elif f_m.check_catalog_name(path_folder_catalog, name) == 0:
                     system('cls')
                     print("Название каталога совпадает с уже созданным")
-                    name = input('Введите название киталога или 0 для отмены ')
+                    name = f_m.input_catalog_name()
 
                 elif name != "0":
                     f_m.create_catalog(path_folder_catalog, name)
