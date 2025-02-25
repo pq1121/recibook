@@ -160,3 +160,24 @@ def check_catalog_name(path: str, name: str):
 
 def input_catalog_name():
     return input('Введите название киталога или 0 для отмены ')
+
+
+def search_recipe(path_folder: str, value: str):
+    catalog_lst = f_f.list_catalog(path_folder)
+    result_search = ''
+
+    for i in range(len(catalog_lst)):
+        path_open = fr"{path_folder}\{catalog_lst[i]}"
+        recipe_lst = f_f.open_catalog(path_open).split('\n')
+
+        for j in range(len(recipe_lst)):
+            recipe = recipe_lst[j].split(';')
+
+            if value in recipe[0]:
+                result_search += f'Рецепт {recipe[0]} находится в каталоге {(catalog_lst[i].split(','))[0]}\n'
+
+    if result_search:
+        return result_search
+
+    else:
+        return 0
