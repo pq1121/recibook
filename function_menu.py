@@ -1,4 +1,4 @@
-from function_files import list_catalog
+import function_files as f_f
 
 add = 1
 dell = 2
@@ -6,9 +6,9 @@ def create_catalog(path: str, name: str):
     import datetime
 
     now = datetime.datetime.now().strftime("%H_%M %d-%m-%Y")
-    path_add = path + rf'\{name},{now},0.rcb'
+    path_add_catalog = path + rf'\{name},{now},0.rcb'
 
-    open(path_add, 'w')
+    open(path_add_catalog, 'w')
 
 
 def lst_all_catalog(lst: list):
@@ -18,7 +18,7 @@ def lst_all_catalog(lst: list):
 
         for i in range(len(lst)):
             lst_new = lst[i].split(',')
-            print(f'{i+1}.{lst_new[0]} дата создания:{lst_new[1].replace("_", ":")} рецептов:{lst_new[2].replace(".rcb","")}')
+            print(f'{i+1}.{lst_new[0]} дата создания:{lst_new[1].replace("_", ":")} рецептов:{lst_new[2].replace(".rcb", "")}')
         print()
 
     else:
@@ -29,8 +29,7 @@ def lst_all_catalog(lst: list):
 def del_catalog(path: str, target: int):
     from os import stat
 
-    # lst_all_catalog(list_catalog(path))
-    lst = list_catalog(path)
+    lst = f_f.list_catalog(path)
     path_del = path + rf'\{lst[target - 1]}'
 
     if stat(path_del).st_size != 0:
@@ -89,8 +88,7 @@ def add_recipe(path: str, lst: list, target: int):
     now = datetime.datetime.now().strftime("%H-%M_%d-%m-%Y")
     path_rec = path + rf'\{lst[target - 1]}'
 
-    with open(path_rec, 'r', encoding='utf8') as file:
-        data = file.read()
+    data = f_f.open_catalog(path_rec)
 
     if not data:
         recipe = f"{name};{compound};{description};{time};{now};{diff}"
@@ -98,8 +96,7 @@ def add_recipe(path: str, lst: list, target: int):
     else:
         recipe = f"\n{name};{compound};{description};{time};{now};{diff}"
 
-    with open(path_rec, 'a', encoding='utf8') as file:
-        file.write(recipe)
+    f_f.add_new_recipe(path_rec, recipe)
     rename_catalog(path_rec, add)
 
 
@@ -130,8 +127,7 @@ def output_recipe(path: str, lst: list, target: int):
         print(f'В каталоге {((lst[target - 1]).split(','))[0]} рецепты отсутствуют\n')
         return 0
 
-    with open(path_open, 'r', encoding='utf8') as file:
-        data_lst = file.read().split('\n')
+    data_lst = f_f.open_catalog(path_open).split('\n')
 
     for i in range(len(data_lst)):
         new_lst = data_lst[i].split(';')
@@ -142,8 +138,7 @@ def output_recipe(path: str, lst: list, target: int):
 
 
 def del_recipe(path: str, target: int):
-    with open(path, 'r', encoding='utf8') as file:
-        data_lst = file.read().split('\n')
+    data_lst = f_f.open_catalog(path).split('\n')
 
     data_lst.remove(data_lst[target - 1])
     result = ''
@@ -152,6 +147,10 @@ def del_recipe(path: str, target: int):
         result += f"{rec}\n"
     result = result[:-1]
 
-    with open(path, 'w', encoding='utf8') as file:
-        file.write(result)
+    f_f.write_recipe(path, result)
     rename_catalog(path, dell)
+
+def check_catalog_name(path: str, name: str):
+    for catalog in f_f.list_catalog(path):
+        if (catalog.split(','))[0] == name:
+            return 0

@@ -32,9 +32,15 @@ def run():
                     print("Название каталога не может быть пустым")
                     name = input('Введите название киталога или 0 для отмены ')
 
+                elif f_m.check_catalog_name(path_folder_catalog, name) == 0:
+                    system('cls')
+                    print("Название каталога совпадает с уже созданным")
+                    name = input('Введите название киталога или 0 для отмены ')
+
                 elif name != "0":
                     f_m.create_catalog(path_folder_catalog, name)
                     break
+
                 else:
                     break
             system('cls')
@@ -48,8 +54,8 @@ def run():
                     tag_del_cat = int(input("Введите номер каталога для удаления или 0 для отмены "))
                     system('cls')
                     if tag_del_cat != 0:
-
                         check = f_m.del_catalog(path_folder_catalog, tag_del_cat)
+
                         if check != 0:
                             remove(check)
                     system('cls')
