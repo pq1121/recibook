@@ -111,13 +111,16 @@ def run():
                         system('cls')
 
                     elif num_sec == "3":
-                        tag_name_rec = input("Выберите название рецепта для поиска ")
+                        tag_name_rec = input("Введите название рецепта для поиска или 0 для отмены ")
                         system('cls')
-                        result_search = f_m.search_recipe(path_folder_catalog, tag_name_rec)
-                        if result_search:
-                            print(f"{result_search}\n")
-                        else:
-                            print(f'Рецепты {tag_name_rec} не найдены в каталогах\n')
+                        if tag_name_rec != '0' and tag_name_rec != '':
+                            result_search = f_m.search_recipe(path_folder_catalog, tag_name_rec)
+
+                            if result_search:
+                                print(f"{result_search}\n")
+                            else:
+                                print(f'Рецепты {tag_name_rec} не найдены в каталогах\n')
+
                     elif num_sec == "5":
                         pass
 
