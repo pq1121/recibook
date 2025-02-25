@@ -1,7 +1,10 @@
+from __future__ import annotations
 import function_files as f_f
 
-add = 1
-dell = 2
+
+ADD = 1
+DELL = 2
+
 def create_catalog(path: str, name: str):
     import datetime
 
@@ -97,7 +100,7 @@ def add_recipe(path: str, lst: list, target: int):
         recipe = f"\n{name};{compound};{description};{time};{now};{diff}"
 
     f_f.add_new_recipe(path_rec, recipe)
-    rename_catalog(path_rec, add)
+    rename_catalog(path_rec, ADD)
 
 
 def rename_catalog(path: str, value: int):
@@ -109,7 +112,7 @@ def rename_catalog(path: str, value: int):
     """
     lst = path.replace('.rcb', '').split(',')
 
-    if value == add:
+    if value == ADD:
         lst[2] = str(int(lst[2]) + 1)
 
     else:
@@ -148,7 +151,7 @@ def del_recipe(path: str, target: int):
     result = result[:-1]
 
     f_f.write_recipe(path, result)
-    rename_catalog(path, dell)
+    rename_catalog(path, DELL)
 
 def check_catalog_name(path: str, name: str):
     for catalog in f_f.list_catalog(path):

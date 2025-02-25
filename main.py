@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 def run():
     from os import getlogin, mkdir, system, listdir, remove, path
 
