@@ -82,7 +82,7 @@ def run():
                     num_sec = input()
                     system('cls')
 
-                    if num_sec == "1" or num_sec == "4":
+                    if num_sec == "1" or num_sec == "4" or num_sec == "5":
                         lst_file = listdir(path_folder_catalog)
                         f_m.lst_all_catalog(lst_file)
                         tag_rec = input("Выберите номер каталога для просмотра рецептов или 0 для отмены ")
@@ -97,6 +97,13 @@ def run():
 
                                 if tag_del_rec != "0" and tag_del_rec.isdigit():
                                     f_m.del_recipe(path_tag, int(tag_del_rec))
+                                system('cls')
+
+                            if num_sec == "5" and path_tag != 0:
+                                tag_edit_rec = input("Выберите номер рецепта для редактирования или 0 для отмены ")
+
+                                if tag_edit_rec != "0" and tag_edit_rec.isdigit():
+                                    f_m.edit_recipe(path_tag, int(tag_edit_rec))
                                 system('cls')
 
                     elif num_sec == "2":
@@ -120,9 +127,6 @@ def run():
                                 print(f"{result_search}\n")
                             else:
                                 print(f'Рецепты {tag_name_rec} не найдены в каталогах\n')
-
-                    elif num_sec == "5":
-                        pass
 
                     elif num_sec == "6":
                         rec = False
