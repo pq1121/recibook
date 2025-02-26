@@ -4,6 +4,7 @@ import function_files as f_f
 
 ADD = 1
 DELL = 2
+EDIT = 3
 
 def create_catalog(path: str, name: str):
     import datetime
@@ -63,7 +64,7 @@ def add_recipe(path: str, lst_catalog: list, target: int):
     """
 
     name, compound, description, time, diff = check_add_recipe(lst_catalog, target)
-    
+
     if name == 0:
         return 0
     now = datetime.datetime.now().strftime("%H-%M_%d-%m-%Y")
@@ -93,8 +94,9 @@ def rename_catalog(path: str, value: int):
     if value == ADD:
         lst[2] = str(int(lst[2]) + 1)
 
-    else:
+    elif value == DELL:
         lst[2] = str(int(lst[2]) - 1)
+
     new_path = f"{lst[0]},{lst[1]},{lst[2]}.rcb"
     rename(path, new_path)
 
@@ -165,7 +167,19 @@ def search_recipe(path_folder: str, value: str):
 
 def edit_recipe(path_edit: str, target: int):
 
-    pass
+    data_lst = f_f.open_catalog(path_edit).split('\n')
+    edit_recipe = check_edit_recipe(data_lst[target - 1])
+
+    if edit_recipe != "0":
+        data_lst[target - 1] = edit_recipe
+        result = ''
+
+        for rec in data_lst:
+            result += f"{rec}\n"
+        result = result[:-1]
+
+        f_f.write_recipe(path_edit, result)
+        rename_catalog(path_edit, EDIT)
 
 
 def check_add_recipe(lst_catalog: list, target: int):
@@ -197,3 +211,33 @@ def check_add_recipe(lst_catalog: list, target: int):
                 lst_info.append(buff)
                 count -= 1
     return lst_info[0], lst_info[1], lst_info[2], lst_info[3], lst_info[4]
+
+
+def check_edit_recipe(recipe: str):
+    import datetime
+
+    lst_recipe = recipe.split(';')
+    print("Чтобы оставить без изменений нажмите Enter или 0 для отмены\n")
+    lst_edit = ['Введите название ', 'Введите состав ', 'Введите краткое описание ', 'Введите время приготовления ',
+                 'Время установится автоматически Enter для продолжения', 'Укажите сложность приготовления ']
+    lst_edit_recipe = []
+    count = len(lst_edit)
+
+    while count > 0:
+
+        for i in range(len(lst_edit)):
+
+            buff = input(lst_edit[i])
+
+            if buff == "0":
+                return "0"
+
+            elif buff == '':
+                lst_edit_recipe.append(lst_recipe[i])
+                count -= 1
+
+            else:
+                lst_edit_recipe.append(buff)
+                count -= 1
+    now = datetime.datetime.now().strftime("%H-%M_%d-%m-%Y")
+    return f"{lst_edit_recipe[0]};{lst_edit_recipe[1]};{lst_edit_recipe[2]};{lst_edit_recipe[3]};{now};{lst_edit_recipe[5]}"
