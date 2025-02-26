@@ -51,9 +51,9 @@ def del_catalog(path: str, target: int):
         return path_del
 
 
-def add_recipe(path: str, lst: list, target: int):
-    from os import system
+def add_recipe(path: str, lst_catalog: list, target: int):
     import datetime
+
     """
     Добавления рецепта в каталог
     :param path: путь до папки с каталогами
@@ -62,34 +62,12 @@ def add_recipe(path: str, lst: list, target: int):
     :return:
     """
 
-    lst_input = ['Введите название ', 'Введите состав ', 'Введите краткое описание ', 'Введите время приготовления ',
-                 'Укажите сложность приготовления ']
-    lst_info = []
-    count = len(lst_input)
-    print(f"Добавление рецепта в каталог {((lst[target - 1]).split(','))[0]} или введите 0 для отмены\n")
-
-    while count > 0:
-
-        for i in range(len(lst_input)):
-
-            buff = input(lst_input[i])
-
-            if buff == "0":
-                return 0
-
-            elif buff == '':
-                system("cls")
-                print(f"{lst_input[i]} не может быть пустым\n")
-                print(f"Добавление рецепта в каталог {((lst[target - 1]).split(','))[0]} или введите 0 для отмены\n")
-                break
-
-            else:
-                lst_info.append(buff)
-                count -= 1
-
-    name, compound, description, time, diff = lst_info[0], lst_info[1], lst_info[2], lst_info[3], lst_info[4]
+    name, compound, description, time, diff = check_add_recipe(lst_catalog, target)
+    
+    if name == 0:
+        return 0
     now = datetime.datetime.now().strftime("%H-%M_%d-%m-%Y")
-    path_rec = path + rf'\{lst[target - 1]}'
+    path_rec = path + rf'\{lst_catalog[target - 1]}'
 
     data = f_f.open_catalog(path_rec)
 
@@ -154,7 +132,9 @@ def del_recipe(path: str, target: int):
     rename_catalog(path, DELL)
 
 def check_catalog_name(path: str, name: str):
+
     for catalog in f_f.list_catalog(path):
+
         if (catalog.split(','))[0] == name:
             return 0
 
@@ -167,7 +147,7 @@ def search_recipe(path_folder: str, value: str):
     result_search = ''
 
     for i in range(len(catalog_lst)):
-        path_open = fr"{path_folder}\{catalog_lst[i]}"
+        path_open = rf"{path_folder}\{catalog_lst[i]}"
         recipe_lst = f_f.open_catalog(path_open).split('\n')
 
         for j in range(len(recipe_lst)):
@@ -181,3 +161,39 @@ def search_recipe(path_folder: str, value: str):
 
     else:
         return 0
+
+
+def edit_recipe(path_edit: str, target: int):
+
+    pass
+
+
+def check_add_recipe(lst_catalog: list, target: int):
+    from os import system
+
+    lst_input = ['Введите название ', 'Введите состав ', 'Введите краткое описание ', 'Введите время приготовления ',
+                 'Укажите сложность приготовления ']
+    lst_info = []
+    count = len(lst_input)
+    print(f"Добавление рецепта в каталог {((lst_catalog[target - 1]).split(','))[0]} или введите 0 для отмены\n")
+
+    while count > 0:
+
+        for i in range(len(lst_input)):
+
+            buff = input(lst_input[i])
+
+            if buff == "0":
+                return 0, 0, 0, 0, 0
+
+            elif buff == '':
+                system("cls")
+                print(f"{lst_input[i]} не может быть пустым\n")
+                print(
+                    f"Добавление рецепта в каталог {((lst_catalog[target - 1]).split(','))[0]} или введите 0 для отмены\n")
+                break
+
+            else:
+                lst_info.append(buff)
+                count -= 1
+    return lst_info[0], lst_info[1], lst_info[2], lst_info[3], lst_info[4]
