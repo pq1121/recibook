@@ -53,10 +53,10 @@ def run():
             if f_m.lst_all_catalog(lst_file):
 
                 if num == "3":
-                    tag_del_cat = int(input("Введите номер каталога для удаления или 0 для отмены "))
+                    tag_del_cat = input("Введите номер каталога для удаления или 0 для отмены ")
                     system('cls')
-                    if tag_del_cat != 0:
-                        check = f_m.del_catalog(path_folder_catalog, tag_del_cat)
+                    if tag_del_cat != "0" and tag_del_cat.isdigit():
+                        check = f_m.del_catalog(path_folder_catalog, int(tag_del_cat))
 
                         if check != 0:
                             remove(check)
@@ -85,29 +85,29 @@ def run():
                     if num_sec == "1" or num_sec == "4":
                         lst_file = listdir(path_folder_catalog)
                         f_m.lst_all_catalog(lst_file)
-                        tag_rec = int(input("Выберите номер каталога для просмотра рецептов или 0 для отмены "))
+                        tag_rec = input("Выберите номер каталога для просмотра рецептов или 0 для отмены ")
                         system('cls')
 
-                        if tag_rec != 0:
+                        if tag_rec != "0" and tag_rec.isdigit():
                             system('cls')
-                            path_tag = f_m.output_recipe(path_folder_catalog, lst_file, tag_rec)
+                            path_tag = f_m.output_recipe(path_folder_catalog, lst_file, int(tag_rec))
 
                             if num_sec == "4" and path_tag != 0:
-                                tag_del_rec = int(input("Выберите номер рецепта для удаления или 0 для отмены "))
+                                tag_del_rec = input("Выберите номер рецепта для удаления или 0 для отмены ")
 
-                                if tag_del_rec != 0:
-                                    f_m.del_recipe(path_tag, tag_del_rec)
+                                if tag_del_rec != "0" and tag_del_rec.isdigit():
+                                    f_m.del_recipe(path_tag, int(tag_del_rec))
                                 system('cls')
 
                     elif num_sec == "2":
 
                         lst_file = listdir(path_folder_catalog)
                         f_m.lst_all_catalog(lst_file)
-                        tag_add_rec = int(input("Выберите номер каталога для добавления рецепта или 0 для отмены "))
+                        tag_add_rec = input("Выберите номер каталога для добавления рецепта или 0 для отмены ")
 
-                        if tag_add_rec != 0:
+                        if tag_add_rec != "0" and tag_add_rec.isdigit():
                             system('cls')
-                            f_m.add_recipe(path_folder_catalog, lst_file, tag_add_rec)
+                            f_m.add_recipe(path_folder_catalog, lst_file, int(tag_add_rec))
                         system('cls')
 
                     elif num_sec == "3":
