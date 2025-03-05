@@ -41,6 +41,7 @@ def run():
 
                 elif name != "0":
                     f_m.create_catalog(path_folder_catalog, name)
+                    f_m.successful_completion()
                     break
 
                 else:
@@ -60,6 +61,7 @@ def run():
 
                         if check != 0:
                             remove(check)
+                            f_m.successful_completion()
                     system('cls')
             else:
                 print("Каталоги с рецептами отсутствуют\n")

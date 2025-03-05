@@ -80,6 +80,7 @@ def add_recipe(path: str, lst_catalog: list, target: int):
 
     f_f.add_new_recipe(path_rec, recipe)
     rename_catalog(path_rec, ADD)
+    successful_completion()
 
 
 def rename_catalog(path: str, value: int):
@@ -132,6 +133,7 @@ def del_recipe(path: str, target: int):
 
     f_f.write_recipe(path, result)
     rename_catalog(path, DELL)
+    successful_completion()
 
 def check_catalog_name(path: str, name: str):
 
@@ -180,6 +182,7 @@ def edit_recipe(path_edit: str, target: int):
 
         f_f.write_recipe(path_edit, result)
         rename_catalog(path_edit, EDIT)
+        successful_completion()
 
 
 def check_add_recipe(lst_catalog: list, target: int):
@@ -241,3 +244,12 @@ def check_edit_recipe(recipe: str):
                 count -= 1
     now = datetime.datetime.now().strftime("%H-%M_%d-%m-%Y")
     return f"{lst_edit_recipe[0]};{lst_edit_recipe[1]};{lst_edit_recipe[2]};{lst_edit_recipe[3]};{now};{lst_edit_recipe[5]}"
+
+
+def successful_completion() -> None:
+    from os import system
+    import time
+
+    print("Успешно выполнено!")
+    time.sleep(1.5)
+    system("clr")
